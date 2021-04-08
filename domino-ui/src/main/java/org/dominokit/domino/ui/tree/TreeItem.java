@@ -17,7 +17,6 @@ package org.dominokit.domino.ui.tree;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static org.dominokit.domino.ui.style.Unit.px;
 import static org.jboss.elemento.Elements.*;
 
 import elemental2.dom.*;
@@ -60,8 +59,6 @@ public class TreeItem<T> extends WavesElement<HTMLLIElement, TreeItem<T>>
   private BaseIcon<?> expandIcon;
 
   private T value;
-
-  private int nextLevel = 1;
 
   private ToggleTarget toggleTarget = ToggleTarget.ANY;
   private final DominoElement<HTMLElement> indicatorContainer =
@@ -256,7 +253,6 @@ public class TreeItem<T> extends WavesElement<HTMLLIElement, TreeItem<T>>
     childrenContainer.appendChild(treeItem.element());
     Style.of(anchorElement).add("tree-toggle");
     treeItem.parent = this;
-    treeItem.setLevel(nextLevel);
     Style.of(treeItem).add("tree-leaf");
     Style.of(this.element()).remove("tree-leaf");
     treeItem.setToggleTarget(this.toggleTarget);
@@ -665,19 +661,6 @@ public class TreeItem<T> extends WavesElement<HTMLLIElement, TreeItem<T>>
       show();
       subItems.forEach(TreeItem::expandAll);
     }
-  }
-
-  /**
-   * Sets the level of this item
-   *
-   * @param level the new level
-   */
-  public void setLevel(int level) {
-    this.nextLevel = level + 1;
-    if (isParent()) {
-      subItems.forEach(treeItem -> treeItem.setLevel(nextLevel));
-    }
-    anchorElement.style().setPaddingLeft(px.of(nextLevel * 15));
   }
 
   /** {@inheritDoc} */

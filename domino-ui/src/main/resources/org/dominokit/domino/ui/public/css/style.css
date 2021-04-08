@@ -2617,7 +2617,7 @@ a {
 
 .menu .list .ml-tree {
     list-style: none;
-    padding-left: 0;
+    padding-left: 15px;
 }
 
 .menu .list .ml-tree li a {

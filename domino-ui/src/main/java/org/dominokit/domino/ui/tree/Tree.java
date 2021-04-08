@@ -174,7 +174,6 @@ public class Tree<T> extends BaseDominoElement<HTMLDivElement, Tree<T>>
   public Tree<T> appendChild(TreeItem<T> treeItem) {
     root.appendChild(treeItem.element());
     treeItem.setParent(this);
-    treeItem.setLevel(1);
     treeItem.setToggleTarget(this.toggleTarget);
     this.subItems.add(treeItem);
     return this;
